@@ -10,7 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "mqtt": "^3.0.0"
+    "firebase-admin": "^8.10.0",
+    "mqtt": "^3.0.0",
+    "save": "^2.4.0"
   },
   "engines": {
     "node": "v8.11.0"

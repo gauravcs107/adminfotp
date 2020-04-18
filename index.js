@@ -9,7 +9,7 @@ var bodyParser = require('body-parser');
 var contants = require('./public/src/contants/Contants');
 var fs = require('fs');
 const teamLogosFolderAssets = './public/assets/teamsLogos';
-var requestURL = "http://localhost:5000/"
+var requestURL = "http://localhost:5000/";
 var teamIconsURL = "assets/teamsLogos/";
 var team1;
 var team2;
@@ -31,7 +31,10 @@ fs.readdir(teamLogosFolderAssets, (err, files) => {
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.static('public'));
-const PORT = process.env.PORT || 5000;
+let PORT = process.env.PORT;
+if (PORT == null || PORT == "") {
+  PORT = 5000;
+}
 
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}...`);
