@@ -315,8 +315,8 @@
       var client ;
       var gametime;
       var gamestatus = "game has started"
-      var requestURL = "http://localhost:5000/"
-      //var requestURL = "https://fotp-verizon.herokuapp.com/"
+      //var requestURL = "http://localhost:5000/"
+      var requestURL = "https://damp-river-98604.herokuapp.com/"
       var teamIconsURL = "assets/teamsLogos/";
       var teams = new Object(); 
       class Team { 
@@ -354,12 +354,13 @@ function startGame(){
   var options={retain:true,
 	qos:2};
 
-client  = new Paho.MQTT.Client("test.mosquitto.org", Number("8080"), clientID);//mqtt.connect("mqtt://broker.hivemq.com",{clientId:"gkmqttjs06"});
+client  = new Paho.MQTT.Client("test.mosquitto.org", Number("8081"), clientID);//mqtt.connect("mqtt://broker.hivemq.com",{clientId:"gkmqttjs06"});
 client.onConnectionLost = onConnectionLost;
 client.onMessageArrived = onMessageArrived;
 
     // Connect the client, if successful, call onConnect function
     client.connect({ 
+      useSSL:true,
         onSuccess: onConnect,
     });
 }
