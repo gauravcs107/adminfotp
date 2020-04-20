@@ -344,9 +344,6 @@ $('#md-close').on('click', function(e) {
     });
 function startGame(){
   pushNotification();
-  
-  //var mqtt    = require('mqtt');
-  //var message = '0';
   gametime = document.getElementById("time").value; 
   console.log("time"+gametime);
   clientID = "clientID-" + parseInt(Math.random() * 100);
