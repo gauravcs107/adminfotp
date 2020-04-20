@@ -9,8 +9,8 @@ var bodyParser = require('body-parser');
 var contants = require('./public/src/contants/Contants');
 var fs = require('fs');
 const teamLogosFolderAssets = './public/assets/teamsLogos';
-var requestURL = "http://localhost:5000/";
-//var requestURL = "https://damp-river-98604.herokuapp.com/"
+//var requestURL = "http://localhost:5000/";
+var requestURL = "https://damp-river-98604.herokuapp.com/"
 var teamIconsURL = "assets/teamsLogos/";
 var team1;
 var team2;
