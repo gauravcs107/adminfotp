@@ -382,12 +382,12 @@
           <br>
           <label for="foul" class="input_label timer_field">Foul type</label>
           <select id="foul" class="input_field timer_field">
-            <option value="volvo">Roughing the kicker</option>
-            <option value="saab">Roughing the passer</option>
-            <option value="mercedes">Holding (Defence)</option>
-            <option value="audi">Holding (Offense)</option>
-            <option value="audi">Encroachment</option>
-            <option value="audi">Personal foul</option>
+            <option value="Roughing the kicker">Roughing the kicker</option>
+            <option value="Roughing the passer">Roughing the passer</option>
+            <option value="Holding (Defence)">Holding (Defence)</option>
+            <option value="Holding (Offense)">Holding (Offense)</option>
+            <option value="Encroachment">Encroachment</option>
+            <option value="Personal foul">Personal foul</option>
           </select>
           <br>
           <label for="time" class="input_label timer_field">Global timer</label>
@@ -563,10 +563,11 @@
       };
 
       function pushNotification() {
-
+        var foulType = document.getElementById("foul").value;
+        console.log(foulType);
         var data = {
           payload: {
-            "key": "jkjk"
+            "foul": foulType
           },
           api_name_: "push_notifications"
         };

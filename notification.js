@@ -26,14 +26,14 @@ async function sendPushNotification(message) {
   }
 }
 
-async function sendThrowFlagNotification() {
+async function sendThrowFlagNotification(foul) {
   await sendPushNotification({
     notification: {
       title: 'A call has been made!',
       body: 'The referee has made a call. Throw your flag now!',
     },
     data: {
-      event: 'flag-thrown',
+      event: foul,
     },
     android: {
       notification: {

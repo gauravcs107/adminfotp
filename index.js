@@ -88,7 +88,9 @@ app.post('/geolocation', (req, res) => {
   res.send(JSON.stringify(geolocation));
 });
 app.post('/push_notifications', (req, res) => {
-  notification.sendThrowFlagNotification();
+  console.log(req.body);
+  var foul = req.body["foul"];
+  notification.sendThrowFlagNotification(foul);
   //var geolocation_ = req.body;
   //geolocation.setLatLong(geolocation_.latitude,geolocation_.longitude);
   //console.log(geolocation);
