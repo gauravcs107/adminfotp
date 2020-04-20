@@ -13,11 +13,11 @@
 
 .md-modal {
 	position: fixed;
-	top: 70%;
+	top: 75%;
 	left: 50%;
 	width: 50%;
-	max-width: 330px;background-color: black;
-	min-width: 120px;
+	max-width: 250px;background-color: black;
+	min-width: 100px;
 	height: auto;
 	z-index: 2000;
 	visibility: hidden;
@@ -227,7 +227,7 @@
           cursor: pointer;
       }
       </style>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.min.js" type="text/javascript"></script>    
   </head>
@@ -270,12 +270,11 @@
             <label for="time">Life-Time</label>
             <input type="text" id="time" name="time" value="15">
             <br>
-            <button id="geoLocation_button" onclick="setGeoLocation()" class="button">Set</button>
-            <br>
+           
             <div class="md-modal md-effect-1" id="modal-1">
                 <div class="md-content" style="background-color:lightblue">
                   <h3>Game Started</h3>
-                  <p>Again to restart,Wait for the button to turn Green !</p>
+                  <p>To trigger another notification, click on “Start the game” button when it turns green </p>
                   <div style="background-color:black">
                     <p>Multiplayer-Game</p>
           
@@ -315,8 +314,8 @@
       var client ;
       var gametime;
       var gamestatus = "game has started"
-      //var requestURL = "http://localhost:5000/"
       var requestURL = "https://damp-river-98604.herokuapp.com/"
+      //var requestURL = "https://fotp-verizon.herokuapp.com/"
       var teamIconsURL = "assets/teamsLogos/";
       var teams = new Object(); 
       class Team { 
@@ -343,7 +342,11 @@ $('#md-close').on('click', function(e) {
       e.preventDefault();
     });
 function startGame(){
+  setGeoLocation();
   pushNotification();
+  
+  //var mqtt    = require('mqtt');
+  //var message = '0';
   gametime = document.getElementById("time").value; 
   console.log("time"+gametime);
   clientID = "clientID-" + parseInt(Math.random() * 100);
@@ -351,13 +354,12 @@ function startGame(){
   var options={retain:true,
 	qos:2};
 
-client  = new Paho.MQTT.Client("test.mosquitto.org", Number("8081"), clientID);//mqtt.connect("mqtt://broker.hivemq.com",{clientId:"gkmqttjs06"});
+client  = new Paho.MQTT.Client("test.mosquitto.org", Number("8080"), clientID);//mqtt.connect("mqtt://broker.hivemq.com",{clientId:"gkmqttjs06"});
 client.onConnectionLost = onConnectionLost;
 client.onMessageArrived = onMessageArrived;
 
     // Connect the client, if successful, call onConnect function
     client.connect({ 
-      useSSL:true,
         onSuccess: onConnect,
     });
 }
