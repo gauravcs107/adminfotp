@@ -1,11 +1,14 @@
 <!doctype html>
 <html>
-  <head>
-    <title>FOTP</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-  title {
+<head>
+  <title>FOTP</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    title {
     display:block;
     color:red;
     font:12px tahoma, serif;
@@ -13,10 +16,12 @@
 
 .md-modal {
 	position: fixed;
-	top: 80%;
+	top: 50%;
 	left: 50%;
 	width: 50%;
-	max-width: 280px;background-color: black;
+	max-width: 480px;
+  background-color: #333;
+  border-top: solid red 2px;
 	min-width: 70px;
 	height: auto;
 	z-index: 2000;
@@ -55,8 +60,11 @@
 
 /* Content styles */
 .md-content {
-	color: #333;
-	background: #fff;
+	color: #fff;
+  font-family: 'Press Start 2P', cursive;
+  font-weight: 100;
+  font-size: 10px;
+  margin: 20px;
 }
 
 /* Effect 1: Fade in and scale up */
@@ -74,6 +82,10 @@
 	-ms-transform: scale(1);
 	transform: scale(1);
 	opacity: 1;
+}
+
+.blur {
+  -webkit-filter: blur(5px) grayscale(50%);
 }
 
 
@@ -128,7 +140,7 @@
 
 /* Add animation (fade in the popup) */
 @-webkit-keyframes fadeIn {
-  from {opacity: 0;} 
+  from {opacity: 0;}
   to {opacity: 1;}
 }
 
@@ -138,21 +150,26 @@
 }
 </style>
 </head>
-<body style="text-align:center">
 
+<body style="text-align:center; background-image: url('./assets/ground_bg.png'); background-repeat: no-repeat; background-size: cover; padding-bottom: 20px">
 
+  <style>
 
+  .app_name {
+    font-family: 'Orbitron', sans-serif;
+    color: #fff;
+    font-size: 28px;
+    text-shadow: 2px 2px #000;
+    margin-bottom: 0;
+  }
 
-
-    <style>
-
-#parent {
-    text-align:center;
-    height:100%;
-    width:100%;
-}
+    #parent {
+        text-align:center;
+        height:100%;
+        width:100%;
+    }
     .block {
-      display: flex;  
+      display: flex;
       flex-wrap: wrap;
     }
     .center {
@@ -163,7 +180,99 @@
         align-content: center;
         width: 80%;
         margin: 0 auto;
-        background: #f0e68c;
+        /* background: #A8A7A7;
+        border-radius: 20px; */
+        background: rgba(0,0,0,0.5);
+        border-top: solid #ff0000 2px;
+        border-bottom: solid #ff0000 2px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.24);
+        transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    }
+
+    .container:hover {
+      box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+
+    .input_label {
+      background: #ff0000;
+      color: #fff;
+      padding: 8px;
+      border-radius: 18px 0 0 18px;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 100;
+      font-size: 14px;
+      margin-right: 0;
+    }
+
+    .input_field {
+      margin-left: -4px;
+      padding: 9px;
+      border: none;
+      border-radius: 0 18px 18px 0;
+    }
+
+    input {
+      outline: none;
+    }
+
+    .lat_field {
+      margin-right: 20px;
+    }
+
+    .timer_field {
+      margin-top: 20px;
+    }
+
+    .start_btn {
+      margin: 10px;
+      background: #333;
+      border: solid #fff 2px;
+      color: #fff;
+      padding: 12px;
+      border-radius: 22px;
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 100;
+      font-size: 14px;
+    }
+
+    .text_vs {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 100;
+      font-size: 16px;
+      align-self: center;
+      margin: 30px;
+      margin-top: 60px;
+      color: #ff0000;
+    }
+
+    .team_name {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 100;
+      font-size: 22px;
+      color: #fff;
+    }
+
+    .status {
+      font-family: 'Press Start 2P', cursive;
+      font-weight: 100;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .close_btn {
+      position: absolute;
+      right: 2%;
+      top: 10%;
+      cursor: pointer;
+      font-family: 'Press Start 2P', cursive;
+      font-weight: 100;
+      font-size: 14px;
+      color: #fff;
+    }
+
+    .logo {
+      position: absolute;
+      left: 10%
     }
       .dropbtn {
         background-color: #3498DB;
@@ -178,35 +287,40 @@
       .dropbtn:hover, .dropbtn:focus {
         background-color: #2980B9;
       }
-      
+
       .dropdown {
         position: relative;
         display: inline-block;
       }
-      
+
       .dropdown-content {
         display: none;
         position: absolute;
         background-color: #f1f1f1;
         min-width: 160px;
-        overflow: auto;
+        overflow-y: auto;
+        overflow-x: hidden;
+        cursor: pointer;
         box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
         z-index: 1;
         width: 160;
-        height: 110px;
-        overflow: scroll;
+        height: 200px;
 
       }
-      
+
+      .vs_img {
+        margin: 100px 40px;
+      }
+
       .dropdown-content a {
         color: black;
         padding: 12px 16px;
         text-decoration: none;
         display: block;
       }
-      
+
       .dropdown a:hover {background-color: #ddd;}
-      
+
       .show {display: block;}
 
       div.ex1 {
@@ -227,285 +341,311 @@
           cursor: pointer;
       }
       </style>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
- 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.min.js" type="text/javascript"></script>    
-  </head>
-  <body bgcolor="#ff8800">
-    <div id="parent"  >
-    <h1>FOTP SERVER</h1> 
-    <br>
-      <div class="container">
-          <H2>Select Teams</H2>
-          <div style="display: inline-flex;">
-              <div class="dropdown">
-                <div>
-                  <h3 id="t1_label"></h3>
-                  <button id="t1_button" onclick="myFunction()" class="dropbtn"></button>
-                </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 
-                <div id="t1_myDropdown" class="dropdown-content">
-                </div>
-              </div>
-              <div style="align-self: center;  padding: 30px;" >VS</div>
-              <div class="dropdown">
-                <div>
-                  <h3 id="t2_label"></h3>
-                   <button id="t2_button" onclick="myFunction1()" class="dropbtn"></button>
-                </div>
-                <div id="t2_myDropdown" class="dropdown-content">
-                </div>
-              </div>
-          </div>  
-          <H3>Set GeoLocation</H3>
-          <div>
-            <p id="geolocation_status"> </p>
-            <label for="lat_text">Latitude</label>
-            <input type="text" id="lat_text" name="Latitude" placeholder="Your Latitude">
-            <br>
-            <label for="long_text">Longitude</label>
-            <input type="text" id="long_text" name="Longitude" placeholder="Your Longitude">
-            <br>
-            
-            <label for="time">Life-Time</label>
-            <input type="text" id="time" name="time" value="15">
-           
-            <br>
-            <div class="md-modal md-effect-1" id="modal-1">
-                <div class="md-content" style="background-color:lightblue">
-                  <h3>Game Started</h3>
-                  <p>To trigger another notification, click on “Start the game” button when it turns green </p>
-                  <div style="background-color:black">
-                    <p>Multiplayer-Game</p>
-          
-                    <button class="md-close" id="md-close">Close me!</button>
-                  </div>
-                </div>
-              </div>
-            
-            <div class="popup" onclick="myFunction()">
-  <span class="popuptext" id="myPopup">Game has started !</span>
-  <span class="popuptext" id="myPopup1">Game has already started !</span>
-</div>
-           <!-- <button id='startbutton'  onclick="startGame()" class="button">Start Game</button> -->
-            <div class="column">
-                <button class="md-trigger" id="md-trigger">Start the Game</button>
-              </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.2/mqttws31.min.js" type="text/javascript"></script>
+  </head>
+
+  <body>
+    <div id="parent">
+      <img src="./assets/fotp_logo.svg" alt="logo" height="80" class="logo"/>
+      <h1 class="app_name">Flag On The Play<br/>Admin Application</h1>
+      <br>
+      <div class="container">
+        <div style="display: inline-flex;">
+          <div class="dropdown">
+            <div>
+              <h3 id="t1_label" class="team_name"></h3>
+              <button id="t1_button" onclick="myFunction()" class="dropbtn"></button>
+            </div>
+
+            <div id="t1_myDropdown" class="dropdown-content">
+            </div>
           </div>
-          <div>
+          <!-- <div class="text_vs">VS</div> -->
+          <img src="./assets/img_vs.svg" alt="vs" height="20" class="vs_img"/>
+          <div class="dropdown">
+            <div>
+              <h3 id="t2_label" class="team_name"></h3>
+              <button id="t2_button" onclick="myFunction1()" class="dropbtn"></button>
+            </div>
+            <div id="t2_myDropdown" class="dropdown-content">
+            </div>
           </div>
+        </div>
+        <div>
+          <p id="geolocation_status" class="status"> </p>
+          <label for="lat_text" class="input_label">Latitude</label>
+          <input type="text" id="lat_text" name="Latitude" placeholder="Target Latitude" class="input_field lat_field">
+          <label for="long_text" class="input_label">Longitude</label>
+          <input type="text" id="long_text" name="Longitude" placeholder="Target Longitude" class="input_field">
+          <br>
+          <label for="foul" class="input_label timer_field">Foul type</label>
+          <select id="foul" class="input_field timer_field">
+            <option value="volvo">Roughing the kicker</option>
+            <option value="saab">Roughing the passer</option>
+            <option value="mercedes">Holding (Defence)</option>
+            <option value="audi">Holding (Offense)</option>
+            <option value="audi">Encroachment</option>
+            <option value="audi">Personal foul</option>
+          </select>
+          <br>
+          <label for="time" class="input_label timer_field">Global timer</label>
+          <input type="text" id="time" name="time" value="15" class="input_field timer_field">
+          <br>
+          <div class="popup" onclick="myFunction()">
+            <span class="popuptext" id="myPopup">Game has started !</span>
+            <span class="popuptext" id="myPopup1">Game has already started !</span>
+          </div>
+          <!-- <button id='startbutton'  onclick="startGame()" class="button">Start Game</button> -->
+          <div class="column">
+            <button class="md-trigger start_btn" id="md-trigger">Send Notification</button>
+          </div>
+        </div>
+        <div>
+        </div>
+
+
 
       </div>
+      <div class="md-modal md-effect-1" id="modal-1">
+        <div class="md-content">
+          <span id="md-close" class="close_btn">X</span>
+          <h3>Game Started</h3>
+          <br/><br/>
+          <p>To trigger another notification, click on<br/><br/> “Send Notification” button when it<br/><br/> turns green </p>
+          <!-- <div style="background-color:black">
+            <p>Multiplayer-Game</p>
+
+            <button class="md-close" id="md-close">Close me!</button>
+          </div> -->
+        </div>
+      </div>
     </div>
-    
+
     <script>
-     // var count = 1;
-    function setColor(btn,count) {
+      // var count = 1;
+      function setColor(btn, count) {
         var property = document.getElementById(btn);
         if (count == 0) {
-            property.style.backgroundColor = "#7FFF00"
-            //count = 1;        
+          property.style.backgroundColor = "#7FFF00"
+          //count = 1;
+        } else {
+          property.style.backgroundColor = "#ff0000"
+          //count = 0;
         }
-        else {
-            property.style.backgroundColor = "#ff0000"
-            //count = 0;
-        }
-    }
-      var client ;
+      }
+      var client;
       var gametime;
       var gamestatus = "game has started"
-      //var requestURL = "http://localhost:5000/"
-      var requestURL = "https://damp-river-98604.herokuapp.com/"
+      var requestURL = "http://localhost:5000/"
+      //var requestURL = "https://damp-river-98604.herokuapp.com/"
       var teamIconsURL = "assets/teamsLogos/";
-      var teams = new Object(); 
-      class Team { 
-        constructor(name,imageURL) {
+      var teams = new Object();
+      class Team {
+        constructor(name, imageURL) {
           this.imageURL = imageURL;
           this.name = name;
         }
       }
-      class GeoLocation{
-        constructor(latitude,longitude) {
+      class GeoLocation {
+        constructor(latitude, longitude) {
           this.latitude = latitude;
           this.longitude = longitude;
         }
       }
       $('#md-trigger').on('click', function(e) {
         startGame();
-        setColor("md-trigger",1);
-      $('#modal-1').toggleClass("md-show"); //you can list several class names 
-      e.preventDefault();
-    });
+        setColor("md-trigger", 1);
+        $('#modal-1').toggleClass("md-show");
+        $('.container').toggleClass("blur") //you can list several class names
+        e.preventDefault();
+      });
 
-$('#md-close').on('click', function(e) {
-      $('#modal-1').toggleClass("md-show"); //you can list several class names 
-      e.preventDefault();
-    });
-function startGame(){
-  setGeoLocation();
-  pushNotification();
-  gametime = document.getElementById("time").value; 
-  console.log("time"+gametime);
-  clientID = "clientID-" + parseInt(Math.random() * 100);
-  var count = 0;
-  var options={retain:true,
-	qos:2};
+      $('#md-close').on('click', function(e) {
+        $('#modal-1').toggleClass("md-show");
+        $('.container').toggleClass("blur") //you can list several class names
+        e.preventDefault();
+      });
 
-client  = new Paho.MQTT.Client("test.mosquitto.org", Number("8081"), clientID);//mqtt.connect("mqtt://broker.hivemq.com",{clientId:"gkmqttjs06"});
-client.onConnectionLost = onConnectionLost;
-client.onMessageArrived = onMessageArrived;
+      function startGame() {
+        setGeoLocation();
+        pushNotification();
+        gametime = document.getElementById("time").value;
+        console.log("time" + gametime);
+        clientID = "clientID-" + parseInt(Math.random() * 100);
+        var count = 0;
+        var options = {
+          retain: true,
+          qos: 2
+        };
 
-    // Connect the client, if successful, call onConnect function
-    client.connect({ 
-      useSSL:true,
-        onSuccess: onConnect,
-    });
-}
+        client = new Paho.MQTT.Client("test.mosquitto.org", Number("8081"), clientID); //mqtt.connect("mqtt://broker.hivemq.com",{clientId:"gkmqttjs06"});
+        client.onConnectionLost = onConnectionLost;
+        client.onMessageArrived = onMessageArrived;
 
-function onConnect() {
-  // console.log("onConnect");
-  client.subscribe("gamestatus");
- 
-  
-  // message.destinationName = "World";
-  // client.send(message)
-    
+        // Connect the client, if successful, call onConnect function
+        client.connect({
+          useSSL: true,
+          onSuccess: onConnect,
+        });
+      }
 
-    // Subscribe to the requested topic
-    console.log("connected");
-    timeofgame = new Paho.MQTT.Message(gametime);
-    timeofgame.destinationName = "gametime";
-    client.send(timeofgame);
-    //client.subscribe("gamestarter");
-    message = new Paho.MQTT.Message("starttimer");
-    message.destinationName = "gamestarter";
-    client.send(message);
-    //client.send("gamestarter", "starttimer", 2, true);
-    //client.disconnect();
-}
-function onConnectionLost(responseObject) {
-  if (responseObject.errorCode !== 0) {
-    console.log("onConnectionLost:"+responseObject.errorMessage);
-  }
-}
-function onMessageArrived(message) {
-  if(message.payloadString=== '0')
-  {var popup = document.getElementById("myPopup");
-  //count=0;
-  setColor("md-trigger",0);
-  //popup.classList.toggle("show");
-}
-else{
-  setColor("md-trigger",1);
-  var popup = document.getElementById("myPopup1");
-  //popup.classList.toggle("show");
-} 
-  console.log("onMessageArrived:"+message.payloadString);
-}
-      function addTeam(name,icon) {
+      function onConnect() {
+        // console.log("onConnect");
+        client.subscribe("gamestatus");
+
+
+        // message.destinationName = "World";
+        // client.send(message)
+
+
+        // Subscribe to the requested topic
+        console.log("connected");
+        timeofgame = new Paho.MQTT.Message(gametime);
+        timeofgame.destinationName = "gametime";
+        client.send(timeofgame);
+        //client.subscribe("gamestarter");
+        message = new Paho.MQTT.Message("starttimer");
+        message.destinationName = "gamestarter";
+        client.send(message);
+        //client.send("gamestarter", "starttimer", 2, true);
+        //client.disconnect();
+      }
+
+      function onConnectionLost(responseObject) {
+        if (responseObject.errorCode !== 0) {
+          console.log("onConnectionLost:" + responseObject.errorMessage);
+        }
+      }
+
+      function onMessageArrived(message) {
+        if (message.payloadString === '0') {
+          var popup = document.getElementById("myPopup");
+          //count=0;
+          setColor("md-trigger", 0);
+          //popup.classList.toggle("show");
+        } else {
+          setColor("md-trigger", 1);
+          var popup = document.getElementById("myPopup1");
+          //popup.classList.toggle("show");
+        }
+        console.log("onMessageArrived:" + message.payloadString);
+      }
+
+      function addTeam(name, icon) {
         var name = name.replace(/-/g, " ");
-        var team = new Team(name,icon);
+        var team = new Team(name, icon);
         teams[name] = team;
         // teams.push(team);
         return team;
       }
-      /* When the user clicks on the button, 
+      /* When the user clicks on the button,
       toggle between hiding and showing the dropdown content */
       function myFunction() {
         document.getElementById("t1_myDropdown").classList.toggle("show");
       }
-    
+
       function myFunction1() {
         document.getElementById("t2_myDropdown").classList.toggle("show");
       }
-      function setGeoLocation(){
+
+      function setGeoLocation() {
         var lat = document.getElementById("lat_text").value;
         var long = document.getElementById("long_text").value;
-        var geo_location = new GeoLocation(lat,long);
+        var geo_location = new GeoLocation(lat, long);
         var data = {
-          payload : geo_location,
-          api_name_ : "geolocation"
+          payload: geo_location,
+          api_name_: "geolocation"
         };
-        document.getElementById("geolocation_status").innerHTML = "geolocation updated";
+        document.getElementById("geolocation_status").innerHTML = "Geolocation updated";
         httpPOST(data)
       };
-      function pushNotification(){
-        
+
+      function pushNotification() {
+
         var data = {
-          payload :   {"key":"jkjk"},
-          api_name_ : "push_notifications"
+          payload: {
+            "key": "jkjk"
+          },
+          api_name_: "push_notifications"
         };
-        
+
         httpPOST(data);
       };
-      window.onload = function(){
+      window.onload = function() {
         console.log("loaded");
-        var teamNames = JSON.parse(httpGet(requestURL+"teamNames"))
-        var teams= JSON.parse(httpGet(requestURL+"teams"))
-        var geolocation= JSON.parse(httpGet(requestURL+"geolocation"))
+        var teamNames = JSON.parse(httpGet(requestURL + "teamNames"))
+        var teams = JSON.parse(httpGet(requestURL + "teams"))
+        var geolocation = JSON.parse(httpGet(requestURL + "geolocation"))
 
 
         // console.log(teamNames);
         var teams_ = teams;
         console.log(teams_);
-          document.getElementById("lat_text").value = geolocation.latitude;
-          document.getElementById("long_text").value = geolocation.longitude;
-          document.getElementById("t1_label").innerHTML = teams.team_1.name;
-          document.getElementById("t2_label").innerHTML = teams.team_2.name;
-           document.getElementById("t1_button").style.backgroundImage = "url("+teams.team_1.imageURL;+")";
-           document.getElementById("t2_button").style.backgroundImage = "url("+teams.team_2.imageURL;+")";
+        document.getElementById("lat_text").value = geolocation.latitude;
+        document.getElementById("long_text").value = geolocation.longitude;
+        document.getElementById("t1_label").innerHTML = teams.team_1.name;
+        document.getElementById("t2_label").innerHTML = teams.team_2.name;
+        document.getElementById("t1_button").style.backgroundImage = "url(" + teams.team_1.imageURL; + ")";
+        document.getElementById("t2_button").style.backgroundImage = "url(" + teams.team_2.imageURL; + ")";
         teamNames.forEach(element => {
-            var team = addTeam(element,element+".png");
-            var dropdown_1 = document.getElementById("t1_myDropdown");
-            var dropdown_2 = document.getElementById("t2_myDropdown");
-            var option_1 = document.createElement("option");
-            var option_2 = document.createElement("option");
-            var button_1 = document.getElementById("t1_button");
-            var button_2 = document.getElementById("t2_button");
-            var label_1 = document.getElementById("t1_label");
-            var label_2 = document.getElementById("t2_label");
+          var team = addTeam(element, element + ".png");
+          var dropdown_1 = document.getElementById("t1_myDropdown");
+          var dropdown_2 = document.getElementById("t2_myDropdown");
+          var option_1 = document.createElement("option");
+          var option_2 = document.createElement("option");
+          var button_1 = document.getElementById("t1_button");
+          var button_2 = document.getElementById("t2_button");
+          var label_1 = document.getElementById("t1_label");
+          var label_2 = document.getElementById("t2_label");
 
-            option_1.text = team.name;
-            option_1.style.padding = '2px';
-            option_1.onclick = function() { optionOnClick(button_1,label_1,option_1,"team1"); } 
-            option_2.text = team.name;
-            option_2.style.padding = '2px';
-            option_2.onclick = function() { optionOnClick(button_2,label_2,option_2,"team2"); } 
-            dropdown_1.append(option_1);
-            dropdown_2.append(option_2);
+          option_1.text = team.name;
+          option_1.style.padding = '2px';
+          option_1.onclick = function() {
+            optionOnClick(button_1, label_1, option_1, "team1");
+          }
+          option_2.text = team.name;
+          option_2.style.padding = '2px';
+          option_2.onclick = function() {
+            optionOnClick(button_2, label_2, option_2, "team2");
+          }
+          dropdown_1.append(option_1);
+          dropdown_2.append(option_2);
         });
       }
-     
-      function httpGet(theUrl){
-          var xmlHttp = new XMLHttpRequest();
-          xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
-          xmlHttp.send( null );
-          return xmlHttp.responseText;
-      }
-      function httpPOST(data) {
-        
-          var xhttp = new XMLHttpRequest();
-          xhttp.onreadystatechange = function() {
-              console.log(this.responseText);
-          };
-          var url = requestURL+ data.api_name_;
-          console.log(url);
-          console.log(data.payload);
-          xhttp.open("POST",url , true);
-          xhttp.setRequestHeader('Content-Type', 'application/json');
-          xhttp.send( JSON.stringify(data.payload));
+
+      function httpGet(theUrl) {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", theUrl, false); // false for synchronous request
+        xmlHttp.send(null);
+        return xmlHttp.responseText;
       }
 
-      function optionOnClick(button,label,option,api_name){
+      function httpPOST(data) {
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+          console.log(this.responseText);
+        };
+        var url = requestURL + data.api_name_;
+        console.log(url);
+        console.log(data.payload);
+        xhttp.open("POST", url, true);
+        xhttp.setRequestHeader('Content-Type', 'application/json');
+        xhttp.send(JSON.stringify(data.payload));
+      }
+
+      function optionOnClick(button, label, option, api_name) {
         console.log(option.text);
         console.log("IMAGE = " + teams[option.text].imageURL);
         var url = 'assets/teamsLogos/' + teams[option.text].imageURL;
-        button.style.backgroundImage = "url("+url+")";
+        button.style.backgroundImage = "url(" + url + ")";
         label.innerHTML = option.text;
-        var team = new Team(option.text,url);
+        var team = new Team(option.text, url);
         var data = {
-          payload : team,
-          api_name_ : api_name
+          payload: team,
+          api_name_: api_name
         };
         // console.log(data);
         httpPOST(data)
@@ -524,7 +664,8 @@ else{
           }
         }
       }
-      </script>
-    
+    </script>
+
   </body>
+
 </html>
