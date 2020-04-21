@@ -431,9 +431,11 @@
       function setColor(btn, count) {
         var property = document.getElementById(btn);
         if (count == 0) {
+          document.getElementById(btn).disabled = false;
           property.style.backgroundColor = "#7FFF00"
           //count = 1;
         } else {
+          document.getElementById(btn).disabled = true;
           property.style.backgroundColor = "#ff0000"
           //count = 0;
         }

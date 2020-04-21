@@ -33,7 +33,8 @@ async function sendThrowFlagNotification(foul) {
       body: 'The referee has made a call. Throw your flag now!',
     },
     data: {
-      event: foul,
+      event: "foul is called",
+      foultype:foul,
     },
     android: {
       notification: {
